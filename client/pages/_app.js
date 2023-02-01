@@ -8,17 +8,14 @@ import '../styles/layout/layout.scss';
 import '../styles/demo/Demos.scss';
 
 export default function MyApp({ Component, pageProps }) {
+    const server_host = process.env.NODE_ENV === 'development' ? 'http://localhost:9001' : 'https://crm.servertiit.keenetic.pro';
     if (Component.getLayout) {
-        return (
-            <LayoutProvider>
-                {Component.getLayout(<Component {...pageProps} />)}
-            </LayoutProvider>
-        )
+        return <LayoutProvider>{Component.getLayout(<Component {...pageProps} />)}</LayoutProvider>;
     } else {
         return (
             <LayoutProvider>
                 <Layout>
-                    <Component {...pageProps} />
+                    <Component {...pageProps} server_host={server_host} />
                 </Layout>
             </LayoutProvider>
         );
