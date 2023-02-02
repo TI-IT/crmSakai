@@ -16,6 +16,8 @@ const AppMenu = () => {
         {
             label: 'UI Components',
             items: [
+                { label: 'Admin Настройка каталога', icon: 'pi pi-fw pi-id-card', to: '/crm/admin/offersTreeCreate' },
+                { label: 'Admin Загрузка каталога с google', icon: 'pi pi-fw pi-id-card', to: '/crm/admin/loadProductsGoogleTable' },
                 { label: 'КП', icon: 'pi pi-fw pi-id-card', to: '/crm/offers' },
                 { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
                 { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },

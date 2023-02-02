@@ -2,6 +2,12 @@ const dbConnect = require('../../dbConnect');
 const mongoose = require('mongoose');
 const Catalog = require('../../../models/crm/Catalog');
 const CategoryProduct = require('../../../models/crm/CategoryProduct');
+async function getDbData(name) {
+  await dbConnect();
+  const collection = mongoose.model(name);
+  const data = await collection.find({});
+  return data;
+}
 const createDataTree = {};
 const treeData = {
   root: [
@@ -103,24 +109,28 @@ const treeData = {
   ],
 };
 
-async function getDbData(name) {
-  await dbConnect();
-  const collection = mongoose.model(name);
-  const data = await collection.find({});
-  return data;
+async function children() {
+  const children = [];
+
+  return children;
 }
+
 async function getAllTreeSelectData() {
   const obj = {};
-  const root = [];
-  const children = [];
-  const catalog = await getDbData('catalog');
+  const objRoot = [];
+  const objChildren = [];
+  const root = await getDbData('catalog');
+  objRoot.push(root);
+  obj.root = objRoot;
+
   const categoryProduct = await getDbData('categoryProduct');
+  objChildren.push(categoryProduct);
 
-  root.push(catalog);
-
-  // console.log(catalog);
-  console.log(obj);
-  return treeData;
+  obj.root.map((i) => {
+    i.children = objChildren;
+  });
+  obj.root = root;
+  return obj;
 }
 
 module.exports = {

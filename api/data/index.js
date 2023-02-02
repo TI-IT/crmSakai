@@ -81,8 +81,32 @@ const Data = {
         type: 'text',
         MongoType: 'String',
       },
-      { name: 'organizations', title: 'Организация', type: 'text', MongoType: 'String' },
-      { name: 'citys', title: 'Город', type: 'text', MongoType: 'String' },
+      { name: 'categoryProduct', title: 'Категория', type: 'text', MongoType: 'String' },
+    ],
+  },
+  OfferTree: {
+    input: [
+      { name: 'surname', title: 'Фамилия', type: 'text', MongoType: 'String' },
+      { name: 'name', title: 'Имя', type: 'text', MongoType: 'String' },
+      { name: 'patronymic', title: 'Отчество', type: 'text', MongoType: 'String' },
+      { name: 'phone', title: 'Телефон', type: 'text', MongoType: 'Number', MongoUnique: true },
+      {
+        name: 'email',
+        title: 'Email',
+        type: 'text',
+        MongoType: 'String',
+      },
+      { name: 'address', title: 'Адрес проживания', type: 'text', MongoType: 'String' },
+      { name: 'notes', title: 'Примечания', type: 'text', MongoType: 'String' },
+    ],
+    dropdown: [
+      {
+        name: 'catalog',
+        title: 'Каталог товаров',
+        type: 'text',
+        MongoType: 'String',
+      },
+      { name: 'categoryProduct', title: 'Категория', type: 'text', MongoType: 'String' },
     ],
   },
   // Город

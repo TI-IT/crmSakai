@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../layout';
 
-const getDataOffers = ({ server_host }) => {
+const GetDataOffersTree = ({ server_host }) => {
     const [dbData, setDbData] = useState({});
     useEffect(getAllData, []);
     async function getAllData() {
@@ -21,9 +21,9 @@ const getDataOffers = ({ server_host }) => {
     }
     return (
         <>
-            <Layout server_host={server_host} dbData={dbData.Offer} />
+            <Layout server_host={server_host} dbData={dbData.Products} />
         </>
     );
 };
 
-export default getDataOffers;
+export default GetDataOffersTree;
