@@ -12,6 +12,7 @@ fs.readFile(filePath, function (err, data) {
 
 async function save(data) {
   await dbConnect();
+
   const collection = mongoose.model('products');
   await collection.create(data);
 }

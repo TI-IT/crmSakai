@@ -21,10 +21,40 @@ const ProductsTable = ({ server_host }) => {
     const [allExpanded, setAllExpanded] = useState(false);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [message, setMessage] = useState('');
+    const [addDataGoogleOneOk, setAddDataGoogleOneOk] = useState(false);
     const [dbDataProductsTitles, setDbDataProductsTitles] = useState([]);
     const router = useRouter();
 
     const applicationService = new ApplicationService();
+
+    async function addDataGoogleOne() {
+        products.map((i) => {
+            fetchAddNewDataGoogle(i);
+        });
+    }
+    async function fetchAddNewDataGoogle(data) {
+        const fethUrl = server_host + '/products/addAllDataGoogle';
+        const fetchData = data;
+        try {
+            const res = await fetch(fethUrl, {
+                method: 'post',
+                credentials: 'include',
+                body: JSON.stringify(fetchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await res.json();
+            if (data.ok) {
+                setMessage('Город добавлен');
+                // rerender();
+            } else {
+                setMessage('Ошибка попробуйте другие данные');
+            }
+        } catch (error) {
+            // alert('Сервер не отвечает');
+        }
+    }
 
     async function getAllProductsData(text) {
         fetch(server_host + '/products/getAllDataGoogle', {
@@ -167,7 +197,15 @@ const ProductsTable = ({ server_host }) => {
             <div className=" mr-3">
                 <Button icon={allExpanded ? 'pi pi-minus' : 'pi pi-plus'} label={allExpanded ? 'Collapse All' : 'Expand All'} onClick={toggleAll} className="w-11rem" />
             </div>
-            <Button label="Создать" className="bg-green-400 border-white-alpha-10" type="button" onClick={() => router.push('/crm/products/addProducts/')} />
+            <Button
+                label="Загрузить с google на mongoDb"
+                className="bg-green-400 border-white-alpha-10"
+                type="button"
+                onClick={() => {
+                    addDataGoogleOne();
+                    router.push('/crm/admin/loadProductsGoogleTable/');
+                }}
+            />
         </div>
     );
 

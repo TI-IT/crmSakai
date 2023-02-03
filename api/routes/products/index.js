@@ -23,6 +23,17 @@ router.post('/addOneData', async (req, res) => {
   }
 });
 
+router.post('/addAllDataGoogle', async (req, res) => {
+  const data = req.body;
+  try {
+    await save(data);
+    res.json({ ok: true });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
+
 router.post('/addAllData', async (req, res) => {
   const client = req.body;
   try {
@@ -41,7 +52,6 @@ router.get('/getAllData', async (req, res) => {
 
 router.get('/getAllDataGoogle', async (req, res) => {
   const data = await getAllDataGoogleJson();
-  console.log(data);
   res.json({ ok: true, data: data });
 });
 

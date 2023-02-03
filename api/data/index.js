@@ -11,10 +11,17 @@ const dropdownMongooseObject = {
 const Data = {
   Products: {
     input: [
+      {
+        name: 'numberId',
+        title: 'Нумерация',
+        type: 'text',
+        MongoType: 'String',
+        MongoUnique: true,
+      },
       { name: 'article', title: 'Артикул', type: 'text', MongoType: 'String' },
       { name: 'productName', title: 'Наименование', type: 'text', MongoType: 'String' },
-      { name: 'costPrice', title: 'Себестоимость', type: 'text', MongoType: 'String' },
-      { name: 'sellingPrice', title: 'Продажная цена', type: 'text', MongoType: 'String' },
+      { name: 'costPrice', title: 'Себестоимость', type: 'text', MongoType: 'Number' },
+      { name: 'sellingPrice', title: 'Продажная цена', type: 'text', MongoType: 'Number' },
       { name: 'linkPhoto', title: 'Сылка на фото', type: 'text', MongoType: 'String' },
     ],
     dropdown: [
@@ -30,7 +37,7 @@ const Data = {
       { name: 'finishingProduct', title: 'Отделка', type: 'text', MongoType: 'String' },
       { name: 'supplierProduct', title: 'Поставщик', type: 'text', MongoType: 'String' },
       { name: 'unit', title: 'Ед. изм.', type: 'text', MongoType: 'String' },
-      { name: 'markup', title: 'Наценка', type: 'number', MongoType: 'Number' },
+      { name: 'markup', title: 'Наценка', type: 'number', MongoType: 'String' },
     ],
   },
   Clients: {
