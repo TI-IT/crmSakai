@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
+import { get } from '../../../models/get';
 
 const Layout = ({ server_host, dbData }) => {
     const [newData, setNewData] = useState({});

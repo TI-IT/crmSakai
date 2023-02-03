@@ -4,7 +4,7 @@ import GetDataGoogle from '../../../../crmServices/admin/googleData/getData';
 const Offers = ({ server_host }) => {
     return (
         <>
-            <h3>Настройка каталога наименование</h3>
+            <h3>Загрузка данных с гугл в базу</h3>
             <GetDataGoogle server_host={server_host} />
         </>
     );

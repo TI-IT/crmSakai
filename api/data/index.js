@@ -17,6 +17,7 @@ const Data = {
         type: 'text',
         MongoType: 'String',
         MongoUnique: true,
+        MongoRequire: true,
       },
       { name: 'article', title: 'Артикул', type: 'text', MongoType: 'String' },
       { name: 'productName', title: 'Наименование', type: 'text', MongoType: 'String' },

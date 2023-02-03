@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../layout';
-import { get } from '../../../models/crud';
+import { get } from '../crmServices/models/crud';
 
-const GetDataOffersTree = ({ server_host }) => {
+const Test = ({ server_host }) => {
     const [dbData, setDbData] = useState({});
     useEffect(getAllData, []);
 
     async function getAllData() {
         const data = await get('data', 'getAllData');
-        setDbData(data);
+        console.log(data);
+        // setDbData();
     }
 
     return (
         <>
-            <Layout server_host={server_host} dbData={dbData.Products} />
+            <h1>TEST</h1>
         </>
     );
 };
 
-export default GetDataOffersTree;
+export default Test;
