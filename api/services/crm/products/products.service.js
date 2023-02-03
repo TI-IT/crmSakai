@@ -52,8 +52,14 @@ async function getAllDataGoogleJson() {
   return data;
 }
 
+async function updateAllDataGoogle() {
+  const data = await getAllGoogleSheeds();
+  return data;
+}
+
 module.exports = {
   save,
   getAll,
   getAllDataGoogleJson,
+  updateAllDataGoogle,
 };

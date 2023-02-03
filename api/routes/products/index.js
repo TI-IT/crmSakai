@@ -5,6 +5,7 @@ const {
   save,
   getAll,
   getAllDataGoogleJson,
+  updateAllDataGoogle,
 } = require('../../services/crm/products/products.service');
 const router = express.Router();
 
@@ -52,6 +53,11 @@ router.get('/getAllData', async (req, res) => {
 
 router.get('/getAllDataGoogle', async (req, res) => {
   const data = await getAllDataGoogleJson();
+  res.json({ ok: true, data: data });
+});
+
+router.get('/updateAllDataGoogle', async (req, res) => {
+  const data = await updateAllDataGoogle();
   res.json({ ok: true, data: data });
 });
 

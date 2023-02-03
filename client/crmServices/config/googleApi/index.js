@@ -21,6 +21,13 @@ const SaveDataGoogle = () => {
         setProducts(data);
     }
 
+    //--------------------Обновить данные с google--------------
+    async function updateAllDataGoogle() {
+        const data = await get('products', 'updateAllDataGoogle');
+        console.log(data);
+        setProducts(data.products);
+    }
+
     //************************************ Записать данные с google на mongoDb
     async function addDataGoogleOne() {
         products.map((i) => {
@@ -37,7 +44,6 @@ const SaveDataGoogle = () => {
 
     return (
         <>
-            <h2>карточка</h2>
             {message}
             <div className="grid">
                 <div className=" mr-3">
@@ -60,12 +66,23 @@ const SaveDataGoogle = () => {
                         }}
                     />
                 </div>
+                <div className=" mr-3">
+                    <Button
+                        label="Обновить данные с google"
+                        className="bg-green-400 border-white-alpha-10"
+                        type="button"
+                        onClick={() => {
+                            updateAllDataGoogle();
+                        }}
+                    />
+                </div>
                 <div className=" mr-3 bg-green-200 border-white-alpha-10 grid">
                     <a href="https://docs.google.com/spreadsheets/d/1IScY8p7BFoRa7QLdGqTw5iHmds3nKhEGGVQvJMVIZnk/edit?usp=sharing" target="_blank">
                         GOOGLE TABLE
                     </a>
                 </div>
             </div>
+            <div>{products && products.map((p) => <div>{p.productName}</div>)}</div>
         </>
     );
 };
