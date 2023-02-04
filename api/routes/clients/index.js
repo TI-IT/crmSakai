@@ -20,9 +20,9 @@ router.post('/addAllData', async (req, res) => {
   }
 });
 
-router.get('/getAll', async (req, res) => {
-  const clients = await getAll();
-  res.json({ ok: true, clients: clients });
+router.get('/getAllData', async (req, res) => {
+  const data = await getAll();
+  res.json({ ok: true, data: data });
 });
 
 router.get('/getAllDataGoogle', async (req, res) => {

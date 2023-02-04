@@ -13,25 +13,26 @@ import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
 import { classNames } from 'primereact/utils';
 import React, { useEffect, useRef, useState } from 'react';
-import { ProductService } from '../../../demo/service/ProductService';
+import { ClientsService } from '../../../crmServices/service/ClientsService';
 
-const Crud = ({ dbData }) => {
-    const [dbDataArray, setDbDataArray] = useState([]);
-    // console.log(dbData.input);
+const CrudClients = () => {
+    //----------------------------------------------------------Получаем заголовки
+    const [dbData, setDbData] = useState([]);
 
-    console.log(dbDataArray);
-    // const emptyProduct = [];
+    const getTableTitlesArray = [];
+    dbData.map((i) => {
+        getTableTitlesArray.push(i.name);
+    });
 
     let emptyProduct = {
-        id: null,
-        name: '',
-        image: null,
-        description: '',
-        category: null,
-        price: 0,
-        quantity: 0,
-        rating: 0,
-        inventoryStatus: 'INSTOCK'
+        numberId: null,
+        surname: '',
+        name: null,
+        patronymic: '',
+        phone: 0,
+        email: '',
+        address: '',
+        notes: ''
     };
 
     const [products, setProducts] = useState(null);
@@ -46,15 +47,14 @@ const Crud = ({ dbData }) => {
     const dt = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    useEffect(() => {
-        const productService = new ProductService();
+    useEffect(async () => {
+        const productService = new ClientsService();
         productService.getProducts().then((data) => setProducts(data));
-        setDbDataArray(dbData);
     }, []);
 
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
+    // const formatCurrency = (value) => {
+    //     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    // };
 
     const openNew = () => {
         setProduct(emptyProduct);
@@ -83,7 +83,6 @@ const Crud = ({ dbData }) => {
             let _product = { ...product };
             if (product.id) {
                 const index = findIndexById(product.id);
-
                 _products[index] = _product;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             } else {
@@ -200,65 +199,66 @@ const Crud = ({ dbData }) => {
     const codeBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
+                <span className="p-column-title">numberId</span>
+                {rowData.numberId}
             </>
         );
     };
 
     const nameBodyTemplate = (rowData) => {
+        // console.log(rowData);
         return (
             <>
-                <span className="p-column-title">Name</span>
+                <span className="p-column-title">name</span>
                 {rowData.name}
             </>
         );
     };
 
-    const imageBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Image</span>
-                <img src={`${contextPath}/demo/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2" width="100" />
-            </>
-        );
-    };
+    // const imageBodyTemplate = (rowData) => {
+    //     return (
+    //         <>
+    //             <span className="p-column-title">Image</span>
+    //             <img src={`${contextPath}/demo/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2" width="100" />
+    //         </>
+    //     );
+    // };
 
-    const priceBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Price</span>
-                {formatCurrency(rowData.price)}
-            </>
-        );
-    };
+    // const priceBodyTemplate = (rowData) => {
+    //     return (
+    //         <>
+    //             <span className="p-column-title">Price</span>
+    //             {formatCurrency(rowData.price)}
+    //         </>
+    //     );
+    // };
 
-    const categoryBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </>
-        );
-    };
+    // const categoryBodyTemplate = (rowData) => {
+    //     return (
+    //         <>
+    //             <span className="p-column-title">Category</span>
+    //             {rowData.category}
+    //         </>
+    //     );
+    // };
 
-    const ratingBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Reviews</span>
-                <Rating value={rowData.rating} readOnly cancel={false} />
-            </>
-        );
-    };
+    // const ratingBodyTemplate = (rowData) => {
+    //     return (
+    //         <>
+    //             <span className="p-column-title">Reviews</span>
+    //             <Rating value={rowData.rating} readOnly cancel={false} />
+    //         </>
+    //     );
+    // };
 
-    const statusBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Status</span>
-                <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>
-            </>
-        );
-    };
+    // const statusBodyTemplate = (rowData) => {
+    //     return (
+    //         <>
+    //             <span className="p-column-title">Status</span>
+    //             <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>
+    //         </>
+    //     );
+    // };
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -323,14 +323,15 @@ const Crud = ({ dbData }) => {
                         responsiveLayout="scroll"
                     >
                         <Column selectionMode="multiple" headerStyle={{ width: '4rem' }}></Column>
-                        <Column field="code" header="Code" sortable body={codeBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
-                        <Column field="name" header="Name" sortable body={nameBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
-                        <Column header="Image" body={imageBodyTemplate}></Column>
-                        <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
-                        <Column field="category" header="Category" sortable body={categoryBodyTemplate} headerStyle={{ minWidth: '10rem' }}></Column>
-                        <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column>
-                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable headerStyle={{ minWidth: '10rem' }}></Column>
+                        <Column field="code" header="numberId" sortable body={codeBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
+                        <Column field="name" header="Имя" sortable body={nameBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
+                        {/* <Column header="Image" body={imageBodyTemplate}></Column> */}
+                        {/* <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column> */}
+                        {/* <Column field="category" header="Category" sortable body={categoryBodyTemplate} headerStyle={{ minWidth: '10rem' }}></Column> */}
+                        {/* <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column> */}
+                        {/* <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable headerStyle={{ minWidth: '10rem' }}></Column> */}
                         <Column body={actionBodyTemplate} headerStyle={{ minWidth: '10rem' }}></Column>
+                        {/* {getTableTitles()} */}
                     </DataTable>
 
                     <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
@@ -402,4 +403,4 @@ const Crud = ({ dbData }) => {
     );
 };
 
-export default Crud;
+export default CrudClients;

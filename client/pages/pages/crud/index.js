@@ -40,6 +40,16 @@ const Crud = () => {
     const dt = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
+    const [dataSource, setDataSource] = useState(null);
+    const dataSourceRef = useRef(null);
+
+    useEffect(() => {
+        if (dataSourceRef.current !== dataSource) {
+            console.log('Data source changed!');
+            dataSourceRef.current = dataSource;
+        }
+    }, [dataSource]);
+
     useEffect(() => {
         const productService = new ProductService();
         productService.getProducts().then((data) => setProducts(data));

@@ -1,10 +1,10 @@
-import GetClients from '../../../crmServices/clients/getClients';
+import CrudClients from '../../../crmServices/clients/crud';
 
 const Clients = ({ server_host }) => {
     return (
         <div>
             <h3>Клиенты</h3>
-            <GetClients server_host={server_host} />
+            <CrudClients server_host={server_host} />
         </div>
     );
 };

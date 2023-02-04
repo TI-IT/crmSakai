@@ -3,7 +3,7 @@ import ClientsTable from '../../clients/table';
 import Crud from '../../components/crud';
 import { get } from '../../models/crud';
 
-const GetClients = ({ server_host }) => {
+const GetClients = () => {
     const [dbData, setDbData] = useState({});
 
     useEffect(getAllData, []);
@@ -12,7 +12,6 @@ const GetClients = ({ server_host }) => {
         const data = await get('data', 'getAllData');
         setDbData(data);
     }
-    console.log(dbData.Clients.input);
 
     return (
         <>
