@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
-import { get, post } from '../../models/crud';
+import { get, post } from '../../../models/crud';
 import { useRouter } from 'next/router';
-import { Link } from 'next/link';
 
-const SaveDataGoogle = () => {
+const SaveDataGoogleProducts = () => {
     const [dbData, setDbData] = useState({});
     const [products, setProducts] = useState([]);
     const [message, setMessage] = useState('');
@@ -24,11 +23,10 @@ const SaveDataGoogle = () => {
     //--------------------Обновить данные с google--------------
     async function updateAllDataGoogle() {
         const data = await get('products', 'updateAllDataGoogle');
-        console.log(data);
-        setProducts(data.products);
+        setProducts(data);
     }
 
-    //************************************ Записать данные с google на mongoDb
+    //-------------------- Записать данные с google на mongoDb
     async function addDataGoogleOne() {
         products.map((i) => {
             console.log(i);
@@ -44,6 +42,7 @@ const SaveDataGoogle = () => {
 
     return (
         <>
+            <h2>Товары</h2>
             {message}
             <div className="grid">
                 <div className=" mr-3">
@@ -82,9 +81,9 @@ const SaveDataGoogle = () => {
                     </a>
                 </div>
             </div>
-            <div>{products && products.map((p) => <div>{p.productName}</div>)}</div>
+            <div>{products && products.map((p, id) => <div key={id}>{p.productName}</div>)}</div>
         </>
     );
 };
 
-export default SaveDataGoogle;
+export default SaveDataGoogleProducts;

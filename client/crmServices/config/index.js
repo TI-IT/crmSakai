@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import SaveDataGoogle from './googleApi';
+import SaveDataGoogleClients from './googleApi/clients';
+import SaveDataGoogleProducts from './googleApi/products';
 
 const Config = () => {
     return (
         <>
-            <h2>карточка</h2>
-            <SaveDataGoogle />
-            {/* <ViewInTable /> */}
+            <SaveDataGoogleClients />
+            <SaveDataGoogleProducts />
         </>
     );
 };

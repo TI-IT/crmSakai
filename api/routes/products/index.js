@@ -1,12 +1,12 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+
+const { save, getAll } = require('../../services/crm/products/products.service');
 const {
-  save,
-  getAll,
   getAllDataGoogleJson,
   updateAllDataGoogle,
-} = require('../../services/crm/products/products.service');
+} = require('../../services/crm/googleSheet/googleSheet.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -52,13 +52,13 @@ router.get('/getAllData', async (req, res) => {
 });
 
 router.get('/getAllDataGoogle', async (req, res) => {
-  const data = await getAllDataGoogleJson();
-  res.json({ ok: true, data: data });
+  const data = await getAllDataGoogleJson('products');
+  res.json({ ok: true, data: data.products });
 });
 
 router.get('/updateAllDataGoogle', async (req, res) => {
-  const data = await updateAllDataGoogle();
-  res.json({ ok: true, data: data });
+  const data = await updateAllDataGoogle('products');
+  res.json({ ok: true, data: data.products });
 });
 
 module.exports = router;
