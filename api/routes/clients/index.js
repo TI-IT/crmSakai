@@ -1,9 +1,6 @@
 const express = require('express');
 const { save, getAll } = require('../../services/crm/clients/clients.service');
-const {
-  getAllDataGoogleJson,
-  updateAllDataGoogle,
-} = require('../../services/crm/googleSheet/googleSheet.service');
+const { getAllDataGoogleJson } = require('../../services/crm/googleSheet/googleSheet.service');
 
 const router = express.Router();
 
@@ -33,8 +30,15 @@ router.get('/getAllDataGoogle', async (req, res) => {
   res.json({ ok: true, data: data.clients });
 });
 
-router.get('/updateAllDataGoogle', async (req, res) => {
-  const data = await updateAllDataGoogle('clients');
-  res.json({ ok: true, data: data.clients });
+router.post('/addAllDataGoogle', async (req, res) => {
+  const data = req.body;
+  try {
+    await save(data);
+    res.json({ ok: true });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
 });
+
 module.exports = router;

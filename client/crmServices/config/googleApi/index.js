@@ -1,49 +1,35 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
-import { get, post } from '../../../models/crud';
-import { useRouter } from 'next/router';
+import { get, post } from '../../models/crud';
+import LayoutClientsData from '../../clients/layout';
+import LayoutProductsData from '../../products/layout';
 
-const SaveDataGoogleProducts = () => {
-    const [dbData, setDbData] = useState({});
-    const [products, setProducts] = useState([]);
+const SaveDataGoogle = ({ nameData }) => {
+    const [getData, setGetData] = useState([]);
     const [message, setMessage] = useState('');
-    const router = useRouter();
+    const [visibleContent, setVisibleContent] = useState(false);
 
-    //--------------------Получить данные с Api--------------
-    async function getAllApiData() {
-        const data = await get('data', 'getAllData');
-        setDbData(data);
-    }
     //--------------------Получить данные с google--------------
     async function getAllDataGoogle() {
-        const data = await get('products', 'getAllDataGoogle');
-        setProducts(data);
-    }
-
-    //--------------------Обновить данные с google--------------
-    async function updateAllDataGoogle() {
-        const data = await get('products', 'updateAllDataGoogle');
-        setProducts(data);
+        const data = await get(nameData, 'getAllDataGoogle');
+        setGetData(data);
     }
 
     //-------------------- Записать данные с google на mongoDb
     async function addDataGoogleOne() {
-        products.map((i) => {
-            console.log(i);
+        getData.map((i) => {
             fetchAddNewDataGoogle(i);
         });
     }
     async function fetchAddNewDataGoogle(data) {
-        console.log(data);
-        const res = await post('products', 'addAllDataGoogle', data);
-        console.log(res);
+        const res = await post(nameData, 'addAllDataGoogle', data);
+        // console.log(res);
         // setMessage(res);
     }
 
     return (
         <>
-            <h2>Товары</h2>
-            {message}
+            <h2>{nameData}</h2>
             <div className="grid">
                 <div className=" mr-3">
                     <Button
@@ -65,25 +51,16 @@ const SaveDataGoogleProducts = () => {
                         }}
                     />
                 </div>
-                <div className=" mr-3">
-                    <Button
-                        label="Обновить данные с google"
-                        className="bg-green-400 border-white-alpha-10"
-                        type="button"
-                        onClick={() => {
-                            updateAllDataGoogle();
-                        }}
-                    />
-                </div>
                 <div className=" mr-3 bg-green-200 border-white-alpha-10 grid">
                     <a href="https://docs.google.com/spreadsheets/d/1IScY8p7BFoRa7QLdGqTw5iHmds3nKhEGGVQvJMVIZnk/edit?usp=sharing" target="_blank">
                         GOOGLE TABLE
                     </a>
                 </div>
             </div>
-            <div>{products && products.map((p, id) => <div key={id}>{p.productName}</div>)}</div>
+            <LayoutClientsData data={getData} />
+            <LayoutProductsData data={getData} />
         </>
     );
 };
 
-export default SaveDataGoogleProducts;
+export default SaveDataGoogle;

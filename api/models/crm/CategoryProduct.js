@@ -12,6 +12,5 @@ const schema = new mongoose.Schema(
 
   { autoCreate: true },
 );
-console.log(schema);
 const CategoryProduct = mongoose.model('categoryProduct', schema);
 module.exports = CategoryProduct;

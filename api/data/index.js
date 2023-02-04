@@ -43,6 +43,14 @@ const Data = {
   },
   Clients: {
     input: [
+      {
+        name: 'numberId',
+        title: 'Нумерация',
+        type: 'text',
+        MongoType: 'String',
+        MongoUnique: true,
+        MongoRequire: true,
+      },
       { name: 'surname', title: 'Фамилия', type: 'text', MongoType: 'String' },
       { name: 'name', title: 'Имя', type: 'text', MongoType: 'String' },
       { name: 'patronymic', title: 'Отчество', type: 'text', MongoType: 'String' },
