@@ -52,7 +52,6 @@ function FormAddOneData({ server_host, addData, rerender }) {
             <Dialog header={'Введите новую ' + addData} visible={displayBasic} style={{ width: '50vw' }} modal footer={basicDialogFooter} onHide={() => setDisplayBasic(false)}>
                 <InputText id={addData} type="text" name={'name'} onChange={(e) => setNewAddData(e.target.value)} value={newAddData.name} className="p-invalid text-blue-600 text-2xl " />
             </Dialog>
-
             <Button className="bg-green-400 border-white-alpha-10 w-5rem" type="button" icon="pi pi-plus" onClick={() => setDisplayBasic(true)} />
         </>
     );

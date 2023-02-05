@@ -21,6 +21,23 @@ async function fetchAddNewDataGoogle(data) {
     console.log(res);
     // setMessage(res);
 }
+async function update(client) {
+    await dbConnect();
+    const collection = mongoose.model('clients');
+    await collection.findOneAndUpdate({ id: client.id }, client);
+}
+//---------------------------------------- create TITLE
+async function getAllApiData() {
+    const titleObjects = {};
+    const data = await get('data', 'getAllData');
+    data.Clients?.input.map((i) => {
+        titleObjects[i.name] = i.title;
+    });
+    data.Clients?.dropdown.map((i) => {
+        titleObjects[i.name] = i.title;
+    });
+    setTitles(titleObjects);
+}
 
 //----------------------------------------------------------MONGOOSE
 //Получить только id

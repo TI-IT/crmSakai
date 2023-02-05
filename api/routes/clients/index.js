@@ -1,5 +1,5 @@
 const express = require('express');
-const { save, getAll, getMaxId } = require('../../services/crm/clients/clients.service');
+const { save, getAll, getMaxId, update } = require('../../services/crm/clients/clients.service');
 const { getAllDataGoogleJson } = require('../../services/crm/googleSheet/googleSheet.service');
 
 const router = express.Router();
@@ -12,6 +12,18 @@ router.post('/addAllData', async (req, res) => {
   const client = req.body;
   try {
     await save(client);
+
+    res.json({ ok: true });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
+
+router.post('/updateAllData', async (req, res) => {
+  const client = req.body;
+  try {
+    await update(client);
 
     res.json({ ok: true });
   } catch (e) {

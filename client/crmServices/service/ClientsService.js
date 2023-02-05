@@ -17,14 +17,24 @@ export class ClientsService {
             .then((d) => d.data);
     }
 
-    // async getProducts() {
-    //     const data = await get('clients', 'getAllData');
-    //     console.log(data);
-    //     return data;
-    // }
     async getProducts() {
         const data = await get('clients', 'getAllData');
         return data;
+    }
+    async getClients() {
+        const data = await get('clients', 'getAllData');
+        return data;
+    }
+    async getClientsTitle() {
+        const titleObjects = {};
+        const data = await get('data', 'getAllData');
+        data.Clients?.input.map((i) => {
+            titleObjects[i.name] = i.title;
+        });
+        data.Clients?.dropdown.map((i) => {
+            titleObjects[i.name] = i.title;
+        });
+        return titleObjects;
     }
 
     getProductsWithOrdersSmall() {

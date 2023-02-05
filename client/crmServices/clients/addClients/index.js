@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
-import CrmDropdown from '../../../crmServices/forma/dropdown/add';
 import { Button } from 'primereact/button';
-import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
+import CrmDropdown from '../../../crmServices/forma/dropdown/add';
 import { get, getId, post } from '../../models/crud';
 
 const AddClients = ({ server_host }) => {
@@ -71,26 +71,6 @@ const AddClients = ({ server_host }) => {
         } else {
             toast.current.show({ severity: 'error', summary: 'Заполните обязательные поля', life: 3000 });
         }
-        // const res = await post('clients', 'addAllData', clients);
-        // const fethUrl = server_host + '/clients/addAllData';
-        // try {
-        //     const res = await fetch(fethUrl, {
-        //         method: 'post',
-        //         credentials: 'include',
-        //         body: JSON.stringify(clients),
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     });
-        //     const data = await res.json();
-        //     if (data.ok) {
-        //         setMessage('Клиент сохранен');
-        //     } else {
-        //         setMessage('Ошибка попробуйте другие данные');
-        //     }
-        // } catch (error) {
-        //     alert('Сервер не отвечает');
-        // }
     }
 
     return (

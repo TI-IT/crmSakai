@@ -8,6 +8,12 @@ async function save(client) {
   await collection.create(client);
 }
 
+async function update(client) {
+  await dbConnect();
+  const collection = mongoose.model('clients');
+  await collection.findOneAndUpdate({ id: client.id }, client);
+}
+
 async function getAll() {
   await dbConnect();
   const collection = mongoose.model('clients');
@@ -29,4 +35,5 @@ module.exports = {
   save,
   getAll,
   getMaxId,
+  update,
 };
