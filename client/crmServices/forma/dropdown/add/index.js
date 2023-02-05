@@ -40,7 +40,6 @@ function crmDropdown({ server_host, getData, change, rerender }) {
                             change(getData, e.value);
                         }}
                         optionLabel="name"
-                        className="p-invalid"
                     />
                 </div>
                 <FormAddOneData server_host={server_host} addData={getData} rerender={getAllData} />

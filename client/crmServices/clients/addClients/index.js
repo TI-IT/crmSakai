@@ -34,7 +34,10 @@ const AddClients = ({ server_host }) => {
     async function getAllApiData() {
         const titleObjects = {};
         const data = await get('data', 'getAllData');
-        await data.Clients.input.map((i) => {
+        data.Clients?.input.map((i) => {
+            titleObjects[i.name] = i.title;
+        });
+        data.Clients?.dropdown.map((i) => {
             titleObjects[i.name] = i.title;
         });
         setTitles(titleObjects);
@@ -59,37 +62,43 @@ const AddClients = ({ server_host }) => {
     }
 
     async function fetchAddNewAllData() {
-        const fethUrl = server_host + '/clients/addAllData';
-        try {
-            const res = await fetch(fethUrl, {
-                method: 'post',
-                credentials: 'include',
-                body: JSON.stringify(clients),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await res.json();
-            if (data.ok) {
-                setMessage('Клиент сохранен');
-            } else {
-                setMessage('Ошибка попробуйте другие данные');
-            }
-        } catch (error) {
-            alert('Сервер не отвечает');
+        if (clients.name || clients.phone) {
+            const res = await post('clients', 'addAllData', clients);
+            toast.current.show({ severity: 'success', summary: 'Клиент добавлен', life: 3000 });
+            setTimeout(() => {
+                router.push('/crm/clients/');
+            }, 1300);
+        } else {
+            toast.current.show({ severity: 'error', summary: 'Заполните обязательные поля', life: 3000 });
         }
+        // const res = await post('clients', 'addAllData', clients);
+        // const fethUrl = server_host + '/clients/addAllData';
+        // try {
+        //     const res = await fetch(fethUrl, {
+        //         method: 'post',
+        //         credentials: 'include',
+        //         body: JSON.stringify(clients),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     });
+        //     const data = await res.json();
+        //     if (data.ok) {
+        //         setMessage('Клиент сохранен');
+        //     } else {
+        //         setMessage('Ошибка попробуйте другие данные');
+        //     }
+        // } catch (error) {
+        //     alert('Сервер не отвечает');
+        // }
     }
-    const showSuccess = () => {
-        toast.current.show({ severity: 'success', summary: 'Клиент сохранен', life: 3000 });
-        setTimeout(() => {
-            router.push('/crm/clients/');
-        }, 1300);
-    };
 
     return (
         <>
             <div className="card ">
-                <label htmlFor={titles.id}>Номер клиента {clients.id}</label>
+                <label htmlFor={titles.id}>
+                    <h3>№ {clients.id}</h3>
+                </label>
                 <div className="grid p-fluid text-left">
                     <div className="col-12 md:col-6">
                         <div className="field">
@@ -107,7 +116,7 @@ const AddClients = ({ server_host }) => {
                         </div>
 
                         <div className="field">
-                            <label htmlFor={titles.city}>{titles.city}</label>
+                            <label htmlFor={titles.citys}>{titles.citys}</label>
                             <CrmDropdown getData={'citys'} server_host={server_host} change={crmDropdownGetObject} rerender={setMessage} />
                         </div>
                         <div className="field">
@@ -145,7 +154,6 @@ const AddClients = ({ server_host }) => {
                         label="Сохранить"
                         onClick={() => {
                             fetchAddNewAllData();
-                            showSuccess();
                         }}
                         icon="pi pi-check"
                         className="bg-green-400 border-white-alpha-10 p-button-success"
