@@ -12,10 +12,10 @@ const Data = {
   Products: {
     input: [
       {
-        name: 'numberId',
+        name: 'id',
         title: 'Нумерация',
         type: 'text',
-        MongoType: 'String',
+        MongoType: 'Number',
         MongoUnique: true,
         MongoRequire: true,
       },
@@ -44,10 +44,10 @@ const Data = {
   Clients: {
     input: [
       {
-        name: 'numberId',
+        name: 'id',
         title: 'Нумерация',
         type: 'text',
-        MongoType: 'String',
+        MongoType: 'Number',
         MongoUnique: true,
         MongoRequire: true,
       },

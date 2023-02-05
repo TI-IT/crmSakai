@@ -16,6 +16,21 @@ export async function get(nameData, method) {
         });
     return getData;
 }
+export async function getId(nameData, method) {
+    const data = await fetch(server_host + '/' + nameData + '/' + method, {
+        method: 'get',
+        credentials: 'include'
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            if (data.ok) {
+                return data.data;
+            }
+        });
+    return data;
+}
 
 export async function post(nameData, method, data) {
     const fetchData = data;

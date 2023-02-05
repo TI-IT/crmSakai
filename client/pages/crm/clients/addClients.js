@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
-import AddClients from '../../../crm/clients/addClients';
+import AddClients from '../../../crmServices/clients/addClients';
 import { useRouter } from 'next/router';
 
 function FormAddAllData({ server_host }) {

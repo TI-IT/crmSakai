@@ -14,6 +14,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { classNames } from 'primereact/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { ClientsService } from '../../../crmServices/service/ClientsService';
+import { useRouter } from 'next/router';
 
 const CrudClients = () => {
     //----------------------------------------------------------Получаем заголовки
@@ -25,7 +26,7 @@ const CrudClients = () => {
     });
 
     let emptyProduct = {
-        numberId: null,
+        id: null,
         surname: '',
         name: null,
         patronymic: '',
@@ -46,6 +47,7 @@ const CrudClients = () => {
     const toast = useRef(null);
     const dt = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const router = useRouter();
 
     useEffect(async () => {
         const productService = new ClientsService();
@@ -199,8 +201,8 @@ const CrudClients = () => {
     const codeBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">numberId</span>
-                {rowData.numberId}
+                <span className="p-column-title">id</span>
+                {rowData.id}
             </>
         );
     };
@@ -263,7 +265,8 @@ const CrudClients = () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => router.push('/crm/clients/addClients/')} />
+                {/* <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} /> */}
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </>
         );
@@ -304,7 +307,6 @@ const CrudClients = () => {
                 <div className="card">
                     <Toast ref={toast} />
                     <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-
                     <DataTable
                         ref={dt}
                         value={products}
@@ -323,7 +325,7 @@ const CrudClients = () => {
                         responsiveLayout="scroll"
                     >
                         <Column selectionMode="multiple" headerStyle={{ width: '4rem' }}></Column>
-                        <Column field="code" header="numberId" sortable body={codeBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
+                        <Column field="id" header="id" sortable body={codeBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
                         <Column field="name" header="Имя" sortable body={nameBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
                         {/* <Column header="Image" body={imageBodyTemplate}></Column> */}
                         {/* <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column> */}
@@ -334,7 +336,7 @@ const CrudClients = () => {
                         {/* {getTableTitles()} */}
                     </DataTable>
 
-                    <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                    {/* <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
                         {product.image && <img src={`${contextPath}/demo/images/product/${product.image}`} alt={product.image} width="150" className="mt-0 mx-auto mb-5 block shadow-2" />}
                         <div className="field">
                             <label htmlFor="name">Name</label>
@@ -378,8 +380,7 @@ const CrudClients = () => {
                                 <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                             </div>
                         </div>
-                    </Dialog>
-
+                    </Dialog> */}
                     <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                         <div className="flex align-items-center justify-content-center">
                             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
@@ -390,7 +391,6 @@ const CrudClients = () => {
                             )}
                         </div>
                     </Dialog>
-
                     <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                         <div className="flex align-items-center justify-content-center">
                             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />

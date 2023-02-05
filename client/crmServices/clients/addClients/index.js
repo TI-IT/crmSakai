@@ -1,27 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
-import CrmDropdown from '../../../crm/forma/dropdown/add';
+import CrmDropdown from '../../../crmServices/forma/dropdown/add';
 import { Button } from 'primereact/button';
 import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
+import { get, getId, post } from '../../models/crud';
 
 const AddClients = ({ server_host }) => {
+    const [dbData, setDbData] = useState('');
     const [message, setMessage] = useState('');
-    const toast = useRef();
-    const [titles, setTitles] = React.useState({
-        surname: 'Фамилия',
-        name: 'Имя',
-        patronymic: 'Отчество',
-        phone: 'Телефон',
-        email: 'Email',
-        analiticAddress: 'Откуда о нас узнали?',
-        organizations: 'Организация',
-        city: 'Город',
-        address: 'Адрес проживания',
-        notes: 'Примечания'
-    });
+    const [titles, setTitles] = React.useState({});
     const [clients, setClients] = React.useState({
         surname: '',
         name: '',
@@ -34,7 +24,25 @@ const AddClients = ({ server_host }) => {
         address: '',
         notes: ''
     });
+    const toast = useRef();
     const router = useRouter();
+    useEffect(async () => {
+        await getAllApiData();
+        await getClientsMaxId();
+    }, []);
+
+    async function getAllApiData() {
+        const titleObjects = {};
+        const data = await get('data', 'getAllData');
+        await data.Clients.input.map((i) => {
+            titleObjects[i.name] = i.title;
+        });
+        setTitles(titleObjects);
+    }
+    async function getClientsMaxId() {
+        const data = await getId('clients', 'getClientsMaxId');
+        changeClients('id', data + 1);
+    }
 
     function changeClients(name, value) {
         return setClients({
@@ -81,6 +89,7 @@ const AddClients = ({ server_host }) => {
     return (
         <>
             <div className="card ">
+                <label htmlFor={titles.id}>Номер клиента {clients.id}</label>
                 <div className="grid p-fluid text-left">
                     <div className="col-12 md:col-6">
                         <div className="field">
