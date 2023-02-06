@@ -3,12 +3,12 @@ import { Dialog } from 'primereact/dialog';
 import UpdateClients from '../../../crmServices/clients/updateClients';
 import { useRouter } from 'next/router';
 
-function FormUpdateClient({ server_host, selectClient, setUpdateDialog, updateClients }) {
+function FormUpdateClient({ server_host, selectedClient, setUpdateDialog, updateClients }) {
     const [displayBasic, setDisplayBasic] = useState(true);
     const router = useRouter();
 
     const header = <h3>Редактирование Клиента</h3>;
-    const basicDialogFooter = <UpdateClients server_host={server_host} selectClient={selectClient} setUpdateDialog={setUpdateDialog} updateClients={updateClients} />;
+    const basicDialogFooter = <UpdateClients server_host={server_host} selectedClient={selectedClient} setUpdateDialog={setUpdateDialog} updateClients={updateClients} />;
 
     return (
         <>

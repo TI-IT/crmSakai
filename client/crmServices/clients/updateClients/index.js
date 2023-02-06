@@ -8,11 +8,11 @@ import { Toast } from 'primereact/toast';
 import CrmDropdown from '../../../crmServices/forma/dropdown/add';
 import { get, post } from '../../models/crud';
 
-const UpdateClients = ({ server_host, selectClient, setUpdateDialog, updateClients }) => {
+const UpdateClients = ({ server_host, selectedClient, setUpdateDialog, updateClients }) => {
     const [dbData, setDbData] = useState('');
     const [message, setMessage] = useState('');
     const [titles, setTitles] = React.useState({});
-    const [clients, setClients] = React.useState(selectClient);
+    const [clients, setClients] = React.useState(selectedClient);
     const toast = useRef();
     const router = useRouter();
     useEffect(async () => {
@@ -62,7 +62,7 @@ const UpdateClients = ({ server_host, selectClient, setUpdateDialog, updateClien
         <>
             <div className="card ">
                 <label className="opacity-70" htmlFor={titles.id}>
-                    <h3>№ {selectClient.id}</h3>
+                    <h3>№ {selectedClient.id}</h3>
                 </label>
                 <div className="grid p-fluid text-left ">
                     <div className="col-12 md:col-6">
