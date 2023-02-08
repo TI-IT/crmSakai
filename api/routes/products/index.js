@@ -6,6 +6,7 @@ const {
   save,
   getAll,
   getProductsTypeProduct,
+  getProductsTypeTransaction,
 } = require('../../services/crm/products/products.service');
 const { getAllDataGoogleJson } = require('../../services/crm/googleSheet/googleSheet.service');
 const router = express.Router();
@@ -51,6 +52,17 @@ router.post('/postProductsTypeProduct', async (req, res) => {
   const select = req.body;
   try {
     const data = await getProductsTypeProduct(select);
+    res.json({ ok: true, data: data });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
+
+router.post('/postProductsTypeTransaction', async (req, res) => {
+  const select = req.body;
+  try {
+    const data = await getProductsTypeTransaction(select);
     res.json({ ok: true, data: data });
   } catch (e) {
     console.error(e);

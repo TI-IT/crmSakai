@@ -22,8 +22,16 @@ async function getProductsTypeProduct(select) {
   return data;
 }
 
+async function getProductsTypeTransaction(select) {
+  await dbConnect();
+  const collection = mongoose.model('products');
+  const data = await collection.find({ typeTransaction: select.name });
+  return data;
+}
+
 module.exports = {
   save,
   getAll,
   getProductsTypeProduct,
+  getProductsTypeTransaction,
 };
