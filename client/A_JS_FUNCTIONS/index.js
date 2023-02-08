@@ -11,6 +11,7 @@ router.push('/crm/products/');
 
 import { get, post } from '../../models/crud';
 //--------------------Получить данные с Api
+const [dbData, setDbData] = useState([]);
 async function getAllApiData() {
     const data = await get('data', 'getAllData');
     setDbData(data);

@@ -100,7 +100,7 @@ const Data = {
       { name: 'categoryProduct', title: 'Категория', type: 'text', MongoType: 'String' },
     ],
   },
-  OfferTree: {
+  Tree: {
     input: [
       { name: 'surname', title: 'Фамилия', type: 'text', MongoType: 'String' },
       { name: 'name', title: 'Имя', type: 'text', MongoType: 'String' },

@@ -8,6 +8,26 @@ async function getDbData(name) {
   const data = await collection.find({});
   return data;
 }
+
+async function getAllTreeSelectData() {
+  const obj = {};
+  const objRoot = [];
+  const objChildren = [];
+  const root = await getDbData('catalog');
+  objRoot.push(root);
+  obj.root = objRoot;
+
+  const categoryProduct = await getDbData('categoryProduct');
+  objChildren.push(categoryProduct);
+
+  obj.root.map((i) => {
+    i.children = objChildren;
+  });
+  obj.root = root;
+  console.log(obj);
+  return obj;
+}
+
 const createDataTree = {};
 const treeData = {
   root: [
@@ -113,24 +133,6 @@ async function children() {
   const children = [];
 
   return children;
-}
-
-async function getAllTreeSelectData() {
-  const obj = {};
-  const objRoot = [];
-  const objChildren = [];
-  const root = await getDbData('catalog');
-  objRoot.push(root);
-  obj.root = objRoot;
-
-  const categoryProduct = await getDbData('categoryProduct');
-  objChildren.push(categoryProduct);
-
-  obj.root.map((i) => {
-    i.children = objChildren;
-  });
-  obj.root = root;
-  return obj;
 }
 
 module.exports = {
