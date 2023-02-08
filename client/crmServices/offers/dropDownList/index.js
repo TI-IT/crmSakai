@@ -7,9 +7,9 @@ const DropDownList = ({ listData, selectDataDropDownList }) => {
     const [selectData, setSelectData] = React.useState(null);
     const [value, setValue] = useState(null);
 
+    //Выподающий список
     function selectDataDropDownList(selectGetData) {
         const productService = new OffersService();
-        //Выподающий список
         productService.getProductsTypeTransaction(selectGetData).then((data) => setSelectData(data));
     }
 
