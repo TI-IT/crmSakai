@@ -45,7 +45,7 @@ export async function post(nameData, method, data) {
         });
         const data = await res.json();
         if (data.ok) {
-            return true;
+            return data.data;
         } else {
             return false;
         }

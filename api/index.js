@@ -63,6 +63,7 @@ const parserRouter = require('./routes/parser');
 const catalogRouter = require('./routes/catalog');
 const offerRouter = require('./routes/offer');
 const treeRouter = require('./routes/tree');
+const typeTransactionRouter = require('./routes/typeTransaction');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -88,6 +89,7 @@ app.use('/parser', parserRouter);
 app.use('/catalog', catalogRouter);
 app.use('/offer', offerRouter);
 app.use('/tree', treeRouter);
+app.use('/typeTransaction', typeTransactionRouter);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

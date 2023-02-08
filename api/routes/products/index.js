@@ -2,7 +2,11 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-const { save, getAll } = require('../../services/crm/products/products.service');
+const {
+  save,
+  getAll,
+  getProductsTypeProduct,
+} = require('../../services/crm/products/products.service');
 const { getAllDataGoogleJson } = require('../../services/crm/googleSheet/googleSheet.service');
 const router = express.Router();
 
@@ -37,6 +41,17 @@ router.post('/addAllData', async (req, res) => {
   try {
     await save(client);
     res.json({ ok: true });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
+
+router.post('/postProductsTypeProduct', async (req, res) => {
+  const select = req.body;
+  try {
+    const data = await getProductsTypeProduct(select);
+    res.json({ ok: true, data: data });
   } catch (e) {
     console.error(e);
     res.json({ ok: false });

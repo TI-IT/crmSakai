@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ProductsService } from '../../../crmServices/service/ProductsService';
+import { OffersService } from '../../../crmServices/service/OffersService';
 
 const CreateOffer = () => {
     const [productTitles, setProductTitles] = useState(null);
@@ -9,7 +9,7 @@ const CreateOffer = () => {
     }, []);
 
     function updateClients() {
-        const productService = new ProductsService();
+        const productService = new OffersService();
         productService.getProductTitles().then((data) => setProductTitles(data));
         productService.getProducts().then((data) => setProducts(data));
     }

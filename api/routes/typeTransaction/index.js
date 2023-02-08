@@ -1,13 +1,10 @@
 const express = require('express');
 
-const {
-  save,
-  getAll,
-} = require('../../services/crm/categoryChildrenProduct/categoryChildrenProduct.service');
+const { save, getAll } = require('../../services/crm/typeTransaction/typeTransaction.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('categoryChildrenProduct');
+  res.send('typeTransaction');
 });
 
 router.post('/addOneData', async (req, res) => {

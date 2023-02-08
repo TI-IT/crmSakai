@@ -26,6 +26,7 @@ const Data = {
       { name: 'linkPhoto', title: 'Сылка на фото', type: 'text', MongoType: 'String' },
     ],
     dropdown: [
+      { name: 'typeTransaction', title: 'Вид сделки', type: 'text', MongoType: 'String' },
       { name: 'typeProduct', title: 'Вид продукта', type: 'text', MongoType: 'String' },
       { name: 'catalog', title: 'Каталог товаров', type: 'text', MongoType: 'String' },
       { name: 'categoryProduct', title: 'Категория', type: 'text', MongoType: 'String' },
@@ -143,6 +144,8 @@ const Data = {
   Markup: dropdownMongooseObject,
   // Каталог
   Catalog: dropdownMongooseObject,
+  // Вид сделки
+  TypeTransaction: dropdownMongooseObject,
 };
 
 const ModelData = (nameModel) => {

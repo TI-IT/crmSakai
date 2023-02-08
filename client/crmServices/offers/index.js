@@ -1,11 +1,14 @@
 import React from 'react';
-import GetDataOffers from '../../../crmServices/offers';
+import CreateOffer from '../../crmServices/offers/createOffer';
+import TypeProducts from '../../crmServices/offers/typeProducts';
+import DropDownListProducts from '../../crmServices/offers/dropDownListProducts';
 
 const GetDataOffers = ({ server_host }) => {
     return (
         <>
-            <h1>OFFER</h1>
-            <GetDataOffers server_host={server_host} />
+            {/* <CreateOffer /> */}
+            <TypeProducts />
+            {/* <DropDownListProducts /> */}
         </>
     );
 };
