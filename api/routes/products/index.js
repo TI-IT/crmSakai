@@ -48,21 +48,20 @@ router.post('/addAllData', async (req, res) => {
   }
 });
 
-router.post('/postProductsTypeProduct', async (req, res) => {
+router.post('/postProductsTypeTransaction', async (req, res) => {
   const select = req.body;
   try {
-    const data = await getProductsTypeProduct(select);
+    const data = await getProductsTypeTransaction(select);
     res.json({ ok: true, data: data });
   } catch (e) {
     console.error(e);
     res.json({ ok: false });
   }
 });
-
-router.post('/postProductsTypeTransaction', async (req, res) => {
+router.post('/postProductsTypeProduct', async (req, res) => {
   const select = req.body;
   try {
-    const data = await getProductsTypeTransaction(select);
+    const data = await getProductsTypeProduct(select);
     res.json({ ok: true, data: data });
   } catch (e) {
     console.error(e);

@@ -3,7 +3,7 @@ import { OffersService } from '../../service/OffersService';
 import TypeProducts from '../typeProducts';
 import { Dropdown } from 'primereact/dropdown';
 
-const DropDownList = ({ listData }) => {
+const DropDownListTypeProducts = ({ listData }) => {
     const [selectData, setSelectData] = React.useState(null);
     const [value, setValue] = useState(null);
 
@@ -33,9 +33,9 @@ const DropDownList = ({ listData }) => {
                     </div>
                 </div>
             </div>
-            <TypeProducts />
+            {/* <TypeProducts /> */}
         </>
     );
 };
 
-export default DropDownList;
+export default DropDownListTypeProducts;

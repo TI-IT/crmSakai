@@ -18,7 +18,12 @@ async function getAll() {
 async function getProductsTypeProduct(select) {
   await dbConnect();
   const collection = mongoose.model('products');
-  const data = await collection.find({ typeProduct: select.name });
+  const data = await collection.find(
+    { $or: [{ typeTransaction: select.typeTransaction }, { typeProduct: select.typeProduct }] },
+    function (err, docs) {
+      if (!err) res.send(docs);
+    },
+  );
   return data;
 }
 
