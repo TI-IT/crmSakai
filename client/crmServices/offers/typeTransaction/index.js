@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { OffersService } from '../../../crmServices/service/OffersService';
-import DropDownList from '../dropDownList';
+import DropDownListTypeTransaction from '../DropDownListTypeTransaction';
 
 const CreateOffer = () => {
     const [typeTransaction, setTypeTransaction] = React.useState([]);
@@ -20,7 +20,7 @@ const CreateOffer = () => {
 
     return (
         <>
-            <DropDownList listData={typeTransaction} />
+            <DropDownListTypeTransaction listData={typeTransaction} />
         </>
     );
 };

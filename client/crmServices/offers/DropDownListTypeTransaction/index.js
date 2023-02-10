@@ -12,7 +12,7 @@ const DropDownList = ({ listData }) => {
         const productService = new OffersService();
         productService.getTypeTransaction(selectGetData).then((data) => setSelectData(data));
     }
-
+    console.log(selectData);
     return (
         <>
             <div className="card p-fluid max-w-30rem h-full">
