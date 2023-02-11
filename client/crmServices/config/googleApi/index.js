@@ -26,12 +26,42 @@ const SaveDataGoogle = ({ nameData }) => {
                 fetchAddNewDataGoogle(i, 'typeProduct');
             });
         }
+        if (getData.catalog) {
+            getData.catalog?.map((i) => {
+                fetchAddNewDataGoogle(i, 'catalog');
+            });
+        }
+        if (getData.categoryProduct) {
+            getData.categoryProduct?.map((i) => {
+                fetchAddNewDataGoogle(i, 'categoryProduct');
+            });
+        }
+        if (getData.categoryChildrenProduct) {
+            getData.categoryChildrenProduct?.map((i) => {
+                fetchAddNewDataGoogle(i, 'categoryChildrenProduct');
+            });
+        }
+        if (getData.finishingProduct) {
+            getData.finishingProduct?.map((i) => {
+                fetchAddNewDataGoogle(i, 'finishingProduct');
+            });
+        }
+        if (getData.supplierProduct) {
+            getData.supplierProduct?.map((i) => {
+                fetchAddNewDataGoogle(i, 'supplierProduct');
+            });
+        }
+        if (getData.unit) {
+            getData.unit?.map((i) => {
+                fetchAddNewDataGoogle(i, 'unit');
+            });
+        }
         getData.map((i) => {
             fetchAddNewDataGoogle(i, nameData);
         });
     }
     async function fetchAddNewDataGoogle(data, nameRoutesData) {
-        const res = await post(nameRoutesData, 'addAllDataGoogle', data);
+        const res = await post(nameRoutesData, 'addOneData', data);
     }
 
     return (

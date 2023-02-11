@@ -47,7 +47,7 @@ router.get('/getAllDataGoogle', async (req, res) => {
   res.json({ ok: true, data: data.clients });
 });
 
-router.post('/addAllDataGoogle', async (req, res) => {
+router.post('/addOneData', async (req, res) => {
   const data = req.body;
   try {
     await save(data);
