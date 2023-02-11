@@ -2,25 +2,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import { OffersService } from '../../../crmServices/service/OffersService';
 import DropDownListTypeProducts from '../dropDownListTypeProducts';
 
-const TypeProducts = () => {
-    const [typeTransaction, setTypeTransaction] = React.useState([]);
-
+const TypeProducts = ({ listData }) => {
     const [value, setValue] = useState(null);
     const [message, setMessage] = useState('');
     let layoutProductsSelect = [];
-    useEffect(() => {
-        getData();
-    }, []);
 
+    if (listData) {
+        getData();
+    }
     function getData() {
-        const newTypeProduct = new OffersService();
+        const newTypeTransaction = new OffersService();
         //Выподающий список
-        // newTypeProduct.getTypeProduct().then((data) => setTypeTransaction(data));
+        newTypeTransaction.getProductsTypeProduct(listData).then((data) => console.log(data));
     }
 
+    // listData = { typeTransaction };
     return (
         <>
-            <DropDownListTypeProducts listData={typeTransaction} />
+            <DropDownListTypeProducts />
         </>
     );
 };

@@ -18,19 +18,15 @@ async function getAll() {
 async function getProductsTypeProduct(select) {
   await dbConnect();
   const collection = mongoose.model('products');
-  const data = await collection.find(
-    { $or: [{ typeTransaction: select.typeTransaction }, { typeProduct: select.typeProduct }] },
-    function (err, docs) {
-      if (!err) res.send(docs);
-    },
-  );
+  const data = await collection.find({ typeTransaction: select.name }).distinct('typeProduct');
+  console.log(data);
   return data;
 }
 
 async function getProductsTypeTransaction(select) {
   await dbConnect();
   const collection = mongoose.model('products');
-  const data = await collection.find({ typeTransaction: select.name });
+  const data = await collection.find({ typeTransaction: select });
   return data;
 }
 

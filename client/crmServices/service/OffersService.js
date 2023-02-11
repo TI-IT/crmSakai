@@ -14,11 +14,7 @@ export class OffersService {
         const data = await get('products', 'getAllData');
         return data;
     }
-    async getProductsTypeTransaction(select) {
-        //
-        const res = await post('products', 'postProductsTypeTransaction', select);
-        return res;
-    }
+
     async getProductsTypeProduct(select) {
         const res = await post('products', 'postProductsTypeProduct', select);
         return res;

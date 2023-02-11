@@ -4,15 +4,9 @@ import TypeProducts from '../typeProducts';
 import { Dropdown } from 'primereact/dropdown';
 
 const DropDownListTypeTransaction = ({ listData }) => {
-    const [selecttypeProduct, setSelecttypeProduct] = React.useState(null);
     const [value, setValue] = useState(null);
-
     //Выподающий список
-    function selectDataDropDownList(selectGetData) {
-        const productService = new OffersService();
-        productService.getTypeProductSelect(selectGetData).then((data) => setSelecttypeProduct(data));
-    }
-    console.log(selecttypeProduct);
+
     return (
         <>
             <div className="card p-fluid max-w-30rem h-full">
@@ -26,14 +20,13 @@ const DropDownListTypeTransaction = ({ listData }) => {
                             value={value}
                             onChange={(e) => {
                                 setValue(e.value);
-                                selectDataDropDownList(e.value);
                             }}
                             optionLabel="name"
                         />
                     </div>
                 </div>
             </div>
-            <TypeProducts listData={selecttypeProduct} />
+            <TypeProducts listData={value} />
         </>
     );
 };
