@@ -1,17 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { OffersService } from '../../service/OffersService';
-import TypeProducts from '../typeProducts';
+import React, { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 
 const DropDownListTypeProducts = ({ listData }) => {
-    // const [selectData, setSelectData] = React.useState(null);
     const [value, setValue] = useState(null);
-
-    //Выподающий список
-    function selectDataDropDownList(selectGetData) {
-        const productService = new OffersService();
-        productService.getTypeTransaction(selectGetData).then((data) => console.log(data));
-    }
 
     return (
         <>
@@ -26,7 +17,6 @@ const DropDownListTypeProducts = ({ listData }) => {
                             value={value}
                             onChange={(e) => {
                                 setValue(e.value);
-                                selectDataDropDownList(e.value);
                             }}
                             optionLabel="name"
                         />

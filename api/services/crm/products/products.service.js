@@ -19,7 +19,6 @@ async function getProductsTypeProduct(select) {
   await dbConnect();
   const collection = mongoose.model('products');
   const data = await collection.find({ typeTransaction: select.name }).distinct('typeProduct');
-  console.log(data);
   return data;
 }
 

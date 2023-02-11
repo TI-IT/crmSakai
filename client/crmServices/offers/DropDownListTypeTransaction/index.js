@@ -3,9 +3,8 @@ import { OffersService } from '../../service/OffersService';
 import TypeProducts from '../typeProducts';
 import { Dropdown } from 'primereact/dropdown';
 
-const DropDownListTypeTransaction = ({ listData }) => {
+const DropDownList = ({ listData }) => {
     const [value, setValue] = useState(null);
-    //Выподающий список
 
     return (
         <>
@@ -31,4 +30,4 @@ const DropDownListTypeTransaction = ({ listData }) => {
     );
 };
 
-export default DropDownListTypeTransaction;
+export default DropDownList;

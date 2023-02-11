@@ -1,25 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { OffersService } from '../../../crmServices/service/OffersService';
+import { get, post } from '../../models/crud';
 import DropDownListTypeProducts from '../dropDownListTypeProducts';
 
 const TypeProducts = ({ listData }) => {
-    const [value, setValue] = useState(null);
-    const [message, setMessage] = useState('');
-    let layoutProductsSelect = [];
-
+    const arrayData = [];
+    const ObjData = {};
     if (listData) {
         getData();
     }
-    function getData() {
-        const newTypeTransaction = new OffersService();
-        //Выподающий список
-        newTypeTransaction.getProductsTypeProduct(listData).then((data) => console.log(data));
+    async function getData() {
+        const res = await post('products', 'postProductsTypeProduct', listData);
+        res.map((i) => {
+            arrayData.push({ name: i });
+        });
     }
-
-    // listData = { typeTransaction };
     return (
         <>
-            <DropDownListTypeProducts />
+            <DropDownListTypeProducts listData={arrayData} />
         </>
     );
 };
