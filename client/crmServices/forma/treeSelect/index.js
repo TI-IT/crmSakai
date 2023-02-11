@@ -44,7 +44,6 @@ const TreeSelectCrm = ({ server_host, value, getData }) => {
             })
             .then((data) => {
                 if (data.ok) {
-                    console.log(data.data);
                     setTreeSelectNodes(data.data.root);
                 }
             });

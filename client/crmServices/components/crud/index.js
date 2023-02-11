@@ -19,7 +19,6 @@ const Crud = ({ dbData }) => {
     const [dbDataArray, setDbDataArray] = useState([]);
     // console.log(dbData.input);
 
-    console.log(dbDataArray);
     // const emptyProduct = [];
 
     let emptyProduct = {

@@ -7,7 +7,6 @@ const Test = ({ server_host }) => {
 
     async function getAllData() {
         const data = await get('data', 'getAllData');
-        console.log(data);
         // setDbData();
     }
 

@@ -102,6 +102,3 @@ const items = Array.from(['custom', 'default']).flatMap((group) => {
     return defaultItems;
   }
 });
-
-console.log(data); // Дата без кастомных ключей в дефолт скоуп
-console.log(items); // Результат

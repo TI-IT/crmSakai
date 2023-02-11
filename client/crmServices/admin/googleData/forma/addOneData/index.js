@@ -23,10 +23,8 @@ function FormAddOneData({ server_host, addData, rerender }) {
 
     async function fetchAddNewData() {
         const fethUrl = server_host + '/' + addData + '/addOneData';
-        console.log(addData);
         const newAddDataObject = {};
         newAddDataObject.name = newAddData;
-        console.log(fethUrl);
         try {
             const res = await fetch(fethUrl, {
                 method: 'post',

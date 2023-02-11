@@ -144,7 +144,6 @@ const CrudClients = ({ server_host }) => {
     };
 
     const nameBodyTemplate = (rowData) => {
-        // console.log(rowData);
         return (
             <>
                 <span className="p-column-title">name</span>

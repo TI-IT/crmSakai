@@ -3,7 +3,6 @@ import CrmDropdown from '../../forma/dropdown/add';
 import { useRouter } from 'next/router';
 
 const TableDropdown = ({ server_host, dbData, newData, setNewData }) => {
-    console.log(dbData);
     const [message, setMessage] = useState('');
     const toast = useRef();
     const router = useRouter();

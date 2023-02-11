@@ -17,9 +17,7 @@ async function getAllApiData() {
     setDbData(data);
 }
 async function fetchAddNewDataGoogle(data) {
-    console.log(data);
     const res = await post('products', 'addAllDataGoogle', data);
-    console.log(res);
     // setMessage(res);
 }
 async function update(client) {
@@ -79,4 +77,3 @@ const array = [1, 2, 1, 2, 3, 4, 5, 2, 4, 1, 1, 6];
 const getUnique = (arr) => {
     return arr.filter((el, ind) => ind === arr.indexOf(el));
 };
-console.log(getUnique(array)); // => [ 1, 2, 3, 4, 5, 6 ]

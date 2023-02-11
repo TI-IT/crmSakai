@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LayoutProductsData = ({ data, filterName }) => {
+const LayoutProductsData = ({ data }) => {
     return (
         <>
             {data.map((d, id) => (

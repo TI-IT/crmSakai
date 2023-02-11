@@ -33,7 +33,6 @@ const TreeSelectCrm = ({ server_host, value, getData }) => {
     }
 
     async function getTreeSelectData() {
-        console.log(getData);
         fetch(server_host + '/' + getData + '/getTreeSelectData', {
             method: 'get',
             credentials: 'include'
@@ -43,7 +42,6 @@ const TreeSelectCrm = ({ server_host, value, getData }) => {
             })
             .then((data) => {
                 if (data.ok) {
-                    console.log(data.data);
                     setTreeSelectNodes(data.data.root);
                 }
             });

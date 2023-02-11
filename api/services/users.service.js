@@ -52,8 +52,6 @@ async function updateUser(user) {
 
   doc['username'] = user.username;
 
-  console.log(doc);
-
   await doc.save();
   return doc;
 }

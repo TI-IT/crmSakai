@@ -16,7 +16,6 @@ const CreateOffer = () => {
     const openNew = () => {
         router.push('/crm/clients/addClients/');
     };
-    // console.log(products);
     if (!productTitles) {
         return <>Загрузка...</>;
     } else {

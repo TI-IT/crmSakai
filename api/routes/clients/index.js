@@ -39,7 +39,6 @@ router.get('/getAllData', async (req, res) => {
 
 router.get('/getClientsMaxId', async (req, res) => {
   const data = await getMaxId();
-  console.log(data);
   res.json({ ok: true, data: data });
 });
 

@@ -50,8 +50,6 @@ async function updatClient(client) {
 
   doc['clientname'] = client.clientname;
 
-  console.log(doc);
-
   await doc.save();
   return doc;
 }

@@ -24,7 +24,6 @@ async function getAllTreeSelectData() {
     i.children = objChildren;
   });
   obj.root = root;
-  console.log(obj);
   return obj;
 }
 
