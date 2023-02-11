@@ -3,11 +3,10 @@ import { Button } from 'primereact/button';
 import { get, post } from '../../models/crud';
 import LayoutClientsData from '../../clients/layout';
 import LayoutProductsData from '../../products/layout';
+import LayoutDirectoryData from '../../directory/layout';
 
 const SaveDataGoogle = ({ nameData }) => {
     const [getData, setGetData] = useState([]);
-    const [message, setMessage] = useState('');
-    const [visibleContent, setVisibleContent] = useState(false);
 
     //--------------------Получить данные с google--------------
     async function getAllDataGoogle() {
@@ -17,14 +16,22 @@ const SaveDataGoogle = ({ nameData }) => {
 
     //-------------------- Записать данные с google на mongoDb
     async function addDataGoogleOne() {
+        if (getData.typeTransaction) {
+            getData.typeTransaction?.map((i) => {
+                fetchAddNewDataGoogle(i, 'typeTransaction');
+            });
+        }
+        if (getData.typeProduct) {
+            getData.typeProduct?.map((i) => {
+                fetchAddNewDataGoogle(i, 'typeProduct');
+            });
+        }
         getData.map((i) => {
-            fetchAddNewDataGoogle(i);
+            fetchAddNewDataGoogle(i, nameData);
         });
     }
-    async function fetchAddNewDataGoogle(data) {
-        const res = await post(nameData, 'addAllDataGoogle', data);
-        // console.log(res);
-        // setMessage(res);
+    async function fetchAddNewDataGoogle(data, nameRoutesData) {
+        const res = await post(nameRoutesData, 'addAllDataGoogle', data);
     }
 
     return (
@@ -59,6 +66,7 @@ const SaveDataGoogle = ({ nameData }) => {
             </div>
             <LayoutClientsData data={getData} />
             <LayoutProductsData data={getData} />
+            <LayoutDirectoryData data={getData} />
         </>
     );
 };

@@ -13,9 +13,9 @@ const TypeProducts = () => {
     }, []);
 
     function getData() {
-        const productService = new OffersService();
+        const newTypeProduct = new OffersService();
         //Выподающий список
-        productService.getTypeProduct().then((data) => setTypeTransaction(data));
+        // newTypeProduct.getTypeProduct().then((data) => setTypeTransaction(data));
     }
 
     return (

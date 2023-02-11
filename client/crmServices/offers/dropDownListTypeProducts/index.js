@@ -4,13 +4,13 @@ import TypeProducts from '../typeProducts';
 import { Dropdown } from 'primereact/dropdown';
 
 const DropDownListTypeProducts = ({ listData }) => {
-    const [selectData, setSelectData] = React.useState(null);
+    // const [selectData, setSelectData] = React.useState(null);
     const [value, setValue] = useState(null);
 
     //Выподающий список
     function selectDataDropDownList(selectGetData) {
         const productService = new OffersService();
-        productService.getTypeTransaction(selectGetData).then((data) => setSelectData(data));
+        productService.getTypeTransaction(selectGetData).then((data) => console.log(data));
     }
 
     return (
@@ -33,7 +33,6 @@ const DropDownListTypeProducts = ({ listData }) => {
                     </div>
                 </div>
             </div>
-            {/* <TypeProducts /> */}
         </>
     );
 };

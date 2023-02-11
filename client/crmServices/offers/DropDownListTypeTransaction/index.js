@@ -3,16 +3,16 @@ import { OffersService } from '../../service/OffersService';
 import TypeProducts from '../typeProducts';
 import { Dropdown } from 'primereact/dropdown';
 
-const DropDownList = ({ listData }) => {
-    const [selectData, setSelectData] = React.useState(null);
+const DropDownListTypeTransaction = ({ listData }) => {
+    const [selecttypeProduct, setSelecttypeProduct] = React.useState(null);
     const [value, setValue] = useState(null);
 
     //Выподающий список
     function selectDataDropDownList(selectGetData) {
         const productService = new OffersService();
-        productService.getTypeTransaction(selectGetData).then((data) => setSelectData(data));
+        productService.getTypeProductSelect(selectGetData).then((data) => setSelecttypeProduct(data));
     }
-    console.log(selectData);
+    console.log(selecttypeProduct);
     return (
         <>
             <div className="card p-fluid max-w-30rem h-full">
@@ -33,9 +33,9 @@ const DropDownList = ({ listData }) => {
                     </div>
                 </div>
             </div>
-            <TypeProducts />
+            <TypeProducts listData={selecttypeProduct} />
         </>
     );
 };
 
-export default DropDownList;
+export default DropDownListTypeTransaction;

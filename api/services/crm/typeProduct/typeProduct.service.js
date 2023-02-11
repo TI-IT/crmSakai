@@ -16,7 +16,14 @@ async function getAll() {
   return data;
 }
 
+async function getTypeProductSelect(select) {
+  await dbConnect();
+  const collection = mongoose.model('typeProduct');
+  const data = await collection.find({ name: select.name });
+  return data;
+}
 module.exports = {
   save,
   getAll,
+  getTypeProductSelect,
 };

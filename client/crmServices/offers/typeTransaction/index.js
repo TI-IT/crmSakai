@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { OffersService } from '../../../crmServices/service/OffersService';
 import DropDownListTypeTransaction from '../DropDownListTypeTransaction';
 
-const CreateOffer = () => {
+const TypeTransaction = () => {
     const [typeTransaction, setTypeTransaction] = React.useState([]);
 
     const [value, setValue] = useState(null);
@@ -13,9 +13,9 @@ const CreateOffer = () => {
     }, []);
 
     function getData() {
-        const productService = new OffersService();
+        const newTypeTransaction = new OffersService();
         //Выподающий список
-        productService.getTypeTransaction().then((data) => setTypeTransaction(data));
+        newTypeTransaction.getTypeTransaction().then((data) => setTypeTransaction(data));
     }
 
     return (
@@ -25,4 +25,4 @@ const CreateOffer = () => {
     );
 };
 
-export default CreateOffer;
+export default TypeTransaction;

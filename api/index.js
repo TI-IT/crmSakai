@@ -64,6 +64,7 @@ const catalogRouter = require('./routes/catalog');
 const offerRouter = require('./routes/offer');
 const treeRouter = require('./routes/tree');
 const typeTransactionRouter = require('./routes/typeTransaction');
+const directoryRouter = require('./routes/directory');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -90,6 +91,7 @@ app.use('/catalog', catalogRouter);
 app.use('/offer', offerRouter);
 app.use('/tree', treeRouter);
 app.use('/typeTransaction', typeTransactionRouter);
+app.use('/directory', directoryRouter);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

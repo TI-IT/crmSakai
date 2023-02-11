@@ -6,6 +6,7 @@ const Config = () => {
         <>
             <SaveDataGoogle nameData={'clients'} />
             <SaveDataGoogle nameData={'products'} />
+            <SaveDataGoogle nameData={'directory'} />
         </>
     );
 };
