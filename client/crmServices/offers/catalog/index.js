@@ -1,11 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { OffersService } from '../../service/OffersService';
-import TypeProducts from '../typeProducts';
+import { get, post } from '../../models/crud';
 import { Dropdown } from 'primereact/dropdown';
 
-const DropDownList = ({ listData }) => {
+const Catalog = ({ listData }) => {
     const [value, setValue] = useState(null);
+    const [message, setMessage] = useState(null);
 
+    const arrayData = [];
+    if (listData) {
+        getData();
+    }
+    async function getData() {
+        const res = await post('products', 'postProductsCatalog', listData);
+        res.map((i) => {
+            arrayData.push({ name: i });
+        });
+    }
     return (
         <>
             <div className="card p-fluid max-w-30rem h-full">
@@ -13,21 +23,21 @@ const DropDownList = ({ listData }) => {
                     <div className="w-10 h-full">
                         <Dropdown
                             id="dropdown1"
-                            placeholder="Выберите Вид сделки"
+                            placeholder="Выберите Каталог"
                             //array[{object.name}]
-                            options={listData}
+                            options={arrayData}
                             value={value}
                             onChange={(e) => {
                                 setValue(e.value);
+                                setMessage(e.value);
                             }}
                             optionLabel="name"
                         />
                     </div>
                 </div>
             </div>
-            <TypeProducts listData={value} />
         </>
     );
 };
 
-export default DropDownList;
+export default Catalog;

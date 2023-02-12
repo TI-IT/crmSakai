@@ -22,6 +22,13 @@ async function getProductsTypeProduct(select) {
   return data;
 }
 
+async function getCatalog(select) {
+  await dbConnect();
+  const collection = mongoose.model('products');
+  const data = await collection.find({ typeProduct: select.name }).distinct('catalog');
+  return data;
+}
+
 async function getProductsTypeTransaction(select) {
   await dbConnect();
   const collection = mongoose.model('products');
@@ -34,4 +41,5 @@ module.exports = {
   getAll,
   getProductsTypeProduct,
   getProductsTypeTransaction,
+  getCatalog,
 };

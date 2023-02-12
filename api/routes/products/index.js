@@ -6,8 +6,10 @@ const {
   getAll,
   getProductsTypeProduct,
   getProductsTypeTransaction,
+  getCatalog,
 } = require('../../services/crm/products/products.service');
 const { getAllDataGoogleJson } = require('../../services/crm/googleSheet/googleSheet.service');
+const { getAllTreeSelectData } = require('../../services/crm/offer/treeSelectData.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -67,6 +69,16 @@ router.post('/postProductsTypeProduct', async (req, res) => {
     res.json({ ok: false });
   }
 });
+router.post('/postProductsCatalog', async (req, res) => {
+  const select = req.body;
+  try {
+    const data = await getCatalog(select);
+    res.json({ ok: true, data: data });
+  } catch (e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
 
 router.get('/getAllData', async (req, res) => {
   const data = await getAll();
@@ -75,6 +87,11 @@ router.get('/getAllData', async (req, res) => {
 
 router.get('/getAllDataGoogle', async (req, res) => {
   const data = await getAllDataGoogleJson('products');
+  res.json({ ok: true, data: data.products });
+});
+
+router.get('/getTreeSelectData', async (req, res) => {
+  const data = await getAllTreeSelectData();
   res.json({ ok: true, data: data.products });
 });
 
